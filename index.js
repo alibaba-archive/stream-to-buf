@@ -21,8 +21,10 @@ module.exports = (stream, options = {}) => {
 
       size += buf.length;
       if (maxSize && size > maxSize) {
-        error = new Error(`stream buffer size exceed ${options.maxSize}`);
-        error.code = 'EXCEED_MAX_SIZE';
+        error = new Error(`entity size exceed ${options.maxSize}`);
+        error.code = 'ENTITY_TOO_LARGE';
+        // usualy use in parse http request so we set status = 413
+        error.status = 413;
         return;
       }
       bufs.push(buf);

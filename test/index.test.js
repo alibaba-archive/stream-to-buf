@@ -30,8 +30,9 @@ describe('stream-to-buf', () => {
       await streamToBuffer(big, { maxSize: '2kb' });
       throw new Error('should not execute');
     } catch (err) {
-      assert(err.message === 'stream buffer size exceed 2kb');
-      assert(err.code === 'EXCEED_MAX_SIZE');
+      assert(err.message === 'entity size exceed 2kb');
+      assert(err.code === 'ENTITY_TOO_LARGE');
+      assert(err.status === 413);
     }
   });
 
