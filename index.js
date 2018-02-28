@@ -40,9 +40,9 @@ module.exports = (stream, options = {}) => {
     }
 
     function done() {
+      cleanup();
       if (error) reject(error);
       else resolve(Buffer.concat(bufs));
-      cleanup();
     }
 
     function cleanup() {
