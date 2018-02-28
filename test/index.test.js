@@ -16,6 +16,13 @@ describe('stream-to-buf', () => {
     assert(buffer.length === 102400);
   });
 
+  it('should collect buffer when end and close both emitted', async () => {
+    const small = fs.createReadStream(path.join(__dirname, 'fixtures/smallfile'));
+    small.once('end', () => small.emit('close'));
+    const buffer = await streamToBuffer(small);
+    assert(buffer.length === 1024);
+  });
+
   it('should return undefined if not readable', async () => {
     const buffer = await streamToBuffer('foo');
     assert(!buffer);
