@@ -20,7 +20,7 @@ module.exports = (stream, options = {}) => {
       if (error) return;
 
       size += buf.length;
-      if (size > maxSize) {
+      if (maxSize && size > maxSize) {
         error = new Error(`stream buffer size exceed ${options.maxSize}`);
         error.code = 'EXCEED_MAX_SIZE';
         return;
