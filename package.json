@@ -1,0 +1,40 @@
+{
+  "name": "stream-to-buf",
+  "description": "convert stream to buffer",
+  "version": "1.0.0",
+  "homepage": "https://github.com/node-modules/stream-to-buf",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/node-modules/stream-to-buf.git"
+  },
+  "dependencies": {
+    "humanize-bytes": "^1.0.1"
+  },
+  "devDependencies": {
+    "autod": "^3.0.1",
+    "egg-bin": "^4.4.0",
+    "egg-ci": "^1.8.0",
+    "eslint": "^4.18.1",
+    "eslint-config-egg": "^7.0.0"
+  },
+  "main": "index.js",
+  "files": [
+    "index.js"
+  ],
+  "scripts": {
+    "lint": "eslint test *.js",
+    "test": "npm run lint -- --fix && npm run test-local",
+    "test-local": "egg-bin test",
+    "cov": "egg-bin cov",
+    "ci": "npm run lint && npm run cov",
+    "autod": "autod"
+  },
+  "author": "dead_horse",
+  "engines": {
+    "node": ">= 8.0.0"
+  },
+  "ci": {
+    "version": "8, 9"
+  },
+  "license": "MIT"
+}
