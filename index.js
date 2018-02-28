@@ -7,7 +7,7 @@ module.exports = (stream, options = {}) => {
     if (!stream.readable) return resolve();
     const maxSize = options.maxSize && bytes(options.maxSize);
 
-    let bufs = [];
+    const bufs = [];
     let size = 0;
     let error;
 
@@ -40,14 +40,12 @@ module.exports = (stream, options = {}) => {
     }
 
     function done() {
+      cleanup();
       if (error) reject(error);
       else resolve(Buffer.concat(bufs));
-      cleanup();
     }
 
     function cleanup() {
-      bufs = [];
-      error = null;
       stream.removeListener('data', onData);
       stream.removeListener('end', onEnd);
       stream.removeListener('error', onEnd);
